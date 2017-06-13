@@ -16,6 +16,7 @@ import ResetPassword from './components/auth/reset_password_container';
 import DashboardToolbar from './components/common/header/dashboard_toolbar_container';
 import CarrierAllocation from './components/carrier_allocation/carrier_allocation_container';
 import LanePerformance from './components/lane_performance/lane_performance_container';
+import PackageTracking from './components/package_tracking/package_tracking_container';
 
 class AppRouter extends Component {
   constructor(props) {
@@ -98,6 +99,11 @@ class AppRouter extends Component {
           <Route
             path="laneperformance"
             components={{ main: LanePerformance, sidebar: Sidebar, toolbar: DashboardToolbar }}
+            onEnter={this.ensureLoggedIn}
+          />;
+          <Route
+            path="package_tracking"
+            components={{ main: PackageTracking, sidebar: Sidebar, toolbar: DashboardToolbar }}
             onEnter={this.ensureLoggedIn}
           />;
         </Route>

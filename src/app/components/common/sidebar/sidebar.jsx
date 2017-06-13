@@ -10,6 +10,7 @@ import ShowChart from 'material-ui/svg-icons/editor/show-chart';
 import Place from 'material-ui/svg-icons/maps/place';
 import LocalShippng from 'material-ui/svg-icons/maps/local-shipping';
 import Directions from 'material-ui/svg-icons/maps/directions';
+import TrackChanges from 'material-ui/svg-icons/action/track-changes';
 import colors from '../../../util/colors';
 
 const Sidebar = (props) => {
@@ -114,6 +115,15 @@ const Sidebar = (props) => {
               color: props.getColor('laneperformance'),
             }}
             onClick={() => props.goToPage('/laneperformance')}
+          />
+          <ListItem
+            primaryText="Package Tracking"
+            leftIcon={<TrackChanges color={'#D8D9D9'} />}
+            style={{
+              fontSize: 14,
+              color: props.getColor('packagetracking'),
+            }}
+            onClick={() => props.goToPage('/package_tracking')}
           />
         </List>
       </MuiThemeProvider>

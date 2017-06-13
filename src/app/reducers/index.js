@@ -7,6 +7,7 @@ import UIReducer from './UI_reducer';
 import DataReducer from './data_reducer';
 import CarrierAllocation from './carrier_allocation_reducer';
 import LanePerformance from './lane_performance_reducer';
+import PackageTracking from './package_tracking_reducer';
 
 const rootReducer = combineReducers({
   currentUser: AuthReducer,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   UI: UIReducer,
   carrierAllocation: CarrierAllocation,
   lanePerformance: LanePerformance,
+  packageTracking: PackageTracking,
   data: DataReducer,
 });
 
