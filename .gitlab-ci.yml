@@ -1,0 +1,58 @@
+cache:
+  paths:
+  - node_modules/
+build:
+  stage: build
+  script:
+   - npm install
+   - npm run build
+   - docker build -t git.dataculture.io:4567/dataculture/cinnabar:ci -t git.dataculture.io:4567/dataculture/cinnabar:$CI_BUILD_REF .
+   - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN git.dataculture.io:4567
+   - docker push git.dataculture.io:4567/dataculture/cinnabar:ci
+   - docker push git.dataculture.io:4567/dataculture/cinnabar:$CI_BUILD_REF
+  only:
+    - development
+  artifacts:
+    paths:
+      - dist/
+
+build_master:
+  stage: build
+  script:
+   - npm install
+   - npm run build
+   - docker build -t git.dataculture.io:4567/dataculture/cinnabar:stable .
+   - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN git.dataculture.io:4567
+   - docker push git.dataculture.io:4567/dataculture/cinnabar:stable
+  only:
+    - master
+  artifacts:
+    paths:
+      - dist/
+
+deploy_cinnabar:
+  stage: deploy
+  script:
+   - rsync -zaP dist/ gitlab-runner@40.84.231.223:/var/flask/cinnabar/app/
+  only:
+   - master
+
+deploy_cinnabar_k8:
+  stage: deploy
+  script:
+    - export GOOGLE_APPLICATION_CREDENTIALS=/home/gitlab-runner/.kube/auth.json
+    - kubectl set image deployment/cinnabar cinnabar=git.dataculture.io:4567/dataculture/cinnabar:$CI_BUILD_REF
+    - kubectl rollout status deployment/cinnabar
+  only:
+    - development
+
+deploy_cinnabar_dev:
+  stage: deploy
+  script:
+   - rsync -zaP dist/ gitlab-runner@40.84.231.223:/var/flask/cinnabar/devapp/ --delete
+  only:
+    - development
+
+stages:
+ - build
+ - deploy
