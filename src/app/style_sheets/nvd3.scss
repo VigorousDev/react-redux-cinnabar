@@ -1,0 +1,42 @@
+.NVD3toolTip {
+	height: 20px;
+	padding: 5px;
+	display: 'flex';
+	align-items: 'center';
+	line-height: 20px;
+	background-color: rgba(97,97,97,1);
+	color: rgba(255,255,255,1.0);
+	border: 0px solid rgba(0,0,0,.2);
+}
+
+.tick line {
+	opacity: 0;
+}
+
+.nvd3.nv-sparkline path {
+    fill: none;
+		stroke-width: 2.5px;
+}
+
+.nv-x text {
+	font-family: 'Lato', sans-serif;
+}
+
+.nv-y text {
+	font-family: 'Lato', sans-serif;
+}
+
+.tooltip {
+	background-color: rgba(97,97,97,1) !important;
+	&.place-bottom {
+	&:after {
+	border: none !important;
+	}
+	}
+	&.place-left {
+	&:after {
+	border: none !important;
+
+	}
+	}
+}

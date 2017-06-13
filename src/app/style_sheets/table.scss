@@ -1,0 +1,82 @@
+//table, caption, tbody, tfoot, thead, tr, th, td,
+
+table {
+  table-layout: fixed;
+  overflow-y: auto;
+  width: 100%;
+  min-width: 960px;
+}
+
+::-webkit-scrollbar {
+  border: none;
+  -webkit-box-shadow: none;
+  width: 8px;
+  padding: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #C1C1C1;
+  border-radius: 8px;
+  height: 24px;
+}
+
+.return-table th {
+  color: #9E9E9E;
+  font-weight: 300;
+  border-bottom: 2px solid #9E9E9E;
+  text-align: left;
+  font-size: 12px;
+  padding: 16px;
+  user-select: none;
+  -moz-user-select: none;
+   -ms-user-select: none;
+}
+
+.return-table tbody tr {
+  color: #000000;
+  font-weight: 500;
+  font-size: 14px;
+  border-bottom: 1px solid #9E9E9E;
+}
+
+.return-table tr td {
+  font-size: 12px;
+  padding: 16px;
+}
+
+.return-table th:focus {
+  outline: none;
+}
+
+.reactable-page-button {
+  color: #444444;
+  padding: 5.5px 10px 5.5px 10px;
+  text-decoration: none;
+}
+
+.reactable-header-sortable {
+  cursor: pointer;
+}
+
+.reactable-next-page {
+  display: none;
+}
+
+.reactable-previous-page {
+  display: none;
+}
+
+.reactable-current-page {
+  color: #FFFFFF;
+  background-color: #3366CC;
+}
+
+.reactable-header-sort-asc {
+  color: #3366CC !important;
+  font-weight: 500 !important;
+}
+
+.reactable-header-sort-desc {
+  color: #3366CC !important;
+  font-weight: 500 !important;
+}
