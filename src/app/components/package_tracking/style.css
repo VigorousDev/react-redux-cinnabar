@@ -1,0 +1,17 @@
+.pagination-bar{
+    clear: both;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+}
+.pagination-pageSize{
+    margin-right: 10px;
+}
+.pagination-item{
+    width: 100px;
+    text-align: left;
+}
+.pagination-control{
+    margin-top: 20px;
+}

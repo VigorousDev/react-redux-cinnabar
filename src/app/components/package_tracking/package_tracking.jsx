@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import CSSStyle from "./style.css";
 import {
     Table,
     TableBody,
@@ -7,148 +8,219 @@ import {
     TableRow,
     TableRowColumn,
 } from 'material-ui/Table';
+import {
+  SelectField,
+  MenuItem,
+} from 'material-ui';
+import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
+
+import Pagination from 'material-ui-pagination';
+
 import {Tabs, Tab} from 'material-ui/Tabs';
 
 import Paper from 'material-ui/Paper';
 import Loading from '../common/loading';
 
-const userData = [
-  {
-    id: '1',
-    name: 'user1',
-    username: 'username1',
-    email: 'user1@combotag.com',
-    date: '2017/06/06',
-    accountType: 'ADMIN',
-    active: true,
+const pageSizes = [5, 10, 50];
+const userData = {
+  data: {
+    data: {
+      rows: [
+        ["54c50b07-c2a7-49ba-9b0d-d1fa08dab0ae","6ddb2db69b0e34a7e157645e787b5c8b471b5270",null,"7446 Ferguson, Houston, Texas, 77018, USA","1577 Anthony, New York City, New York, 10151, USA",null],
+        ["54c50b07-c2a7-49ba-9b0d-d1fa08dab0ae","6ddb2db69b0e34a7e157645e787b5c8b471b5270",null,"7446 Ferguson, Houston, Texas, 77018, USA","1577 Anthony, New York City, New York, 10151, USA","Pending Allocation"],
+        ["54c50b07-c2a7-49ba-9b0d-d1fa08dab0ae","6ddb2db69b0e34a7e157645e787b5c8b471b5270",null,"7446 Ferguson, Houston, Texas, 77018, USA","1577 Anthony, New York City, New York, 10151, USA","delivered"],
+        ["54c50b07-c2a7-49ba-9b0d-d1fa08dab0ae","6ddb2db69b0e34a7e157645e787b5c8b471b5270",null,"7446 Ferguson, Houston, Texas, 77018, USA","1577 Anthony, New York City, New York, 10151, USA"," in tranSit"],
+        ["54c50b07-c2a7-49ba-9b0d-d1fa08dab0ae","6ddb2db69b0e34a7e157645e787b5c8b471b5270",null,"7446 Ferguson, Houston, Texas, 77018, USA","1577 Anthony, New York City, New York, 10151, USA"," allocated "],
+        ["54c50b07-c2a7-49ba-9b0d-d1fa08dab0ae","6ddb2db69b0e34a7e157645e787b5c8b471b5270",null,"7446 Ferguson, Houston, Texas, 77018, USA","1577 Anthony, New York City, New York, 10151, USA", "all"],
+        ["54c50b07-c2a7-49ba-9b0d-d1fa08dab0ae","6ddb2db69b0e34a7e157645e787b5c8b471b5270",null,"7446 Ferguson, Houston, Texas, 77018, USA","1577 Anthony, New York City, New York, 10151, USA",null],
+
+      ],
+    }
+  }
+};
+const styles = {
+  container: {
+    width: '100%',
+    padding: 16,
+    marginBottom: 16,
   },
-    {
-        id: '2',
-        name: 'user2',
-        username: 'username2',
-        email: 'user2@combotag.com',
-        date: '2017/06/06',
-        accountType: 'PUBLISHER',
-        active: true,
+  header: {
+    fontSize: 20,
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  rightButton: {
+    display: 'flex',
+  },
+  headline: {
+    fontSize: 24,
+    paddingTop: 16,
+    marginBottom: 12,
+    fontWeight: 400,
+  },
+  pagination: {
+    pageSize: {
+        width: 100,
     },
-    {
-        id: '3',
-        name: 'user3',
-        username: 'username3',
-        email: 'user3@combotag.com',
-        date: '2017/06/06',
-        accountType: 'ADVERTISER',
-        active: true,
+    row: {
+      whiteSpace: 'pre-wrap',
     },
-    {
-        id: '4',
-        name: 'user4',
-        username: 'username4',
-        email: 'user4@combotag.com',
-        date: '2017/06/06',
-        accountType: 'PILOT_PUBLISHER',
-        active: true,
+    header_0:{
+      width: 200,
+      textAlign: 'center',
     },
-    {
-        id: '5',
-        name: 'user5',
-        username: 'username5',
-        email: 'user5@combotag.com',
-        date: '2017/06/06',
-        accountType: 'PILOT_ADVERTISER',
-        active: true,
+    header_1:{
+      width: 200,
+      textAlign: 'center',
     },
-    {
-        id: '6',
-        name: 'user6',
-        username: 'username6',
-        email: 'user6@combotag.com',
-        date: '2017/06/06',
-        accountType: 'ACCOUNT_MANAGER',
-        active: true,
+    header_2:{
+      width: 100,
+      textAlign: 'center',
     },
-    {
-        id: '7',
-        name: 'user7',
-        username: 'username7',
-        email: 'user7@combotag.com',
-        date: '2017/06/06',
-        networkName: 'Remote',
-        accountType: 'NETWORK',
-        active: false,
+    col_0: {
+      width: 200,
+      whiteSpace: 'white-space',
+      wordWrap: 'break-word',
+      textAlign: 'center',
     },
-];
+    col_1: {
+      width: 200,
+      whiteSpace: 'white-space',
+      wordWrap: 'break-word',
+      textAlign: 'center',
+    },
+    col_2: {
+      width: 100,
+      whiteSpace: 'white-space',
+      wordWrap: 'break-word',
+      textAlign: 'center',
+    },
+  },
+  radioGroup: {
+    width: '100%',
+    display: 'flex',
+    marginTop: 30,
+    marginBottom: 20,
+  },
+  radioButton: {
+    paddingLeft: 30,
+    width: '25%',
+  },
+};
 class PackageTracking extends Component{
   constructor(props){
     super(props);
     this.state = {
-      tab: 'all'
+      filter: '0',
+      rows: props.data.data.rows.slice(),
+      rows_filtered: props.data.data.rows.slice(),
+      pageSize: 10,
+      pageNumber: 1,
+      totalPage: 1,
     }    
   }
 
+  componentDidMount(){
+    console.log(this.props.data);
+    this.adjustPageNumber(this.state.rows_filtered, this.state.pageSize);
+  }
+
   getTable() {
-    let body = userData.map((user, index) => {
-                return (<TableRow key={user.id} selectable={false}>
-                  <TableRowColumn>{user.name}</TableRowColumn>
-                  <TableRowColumn>{user.username}</TableRowColumn>
-                  <TableRowColumn>{user.email}</TableRowColumn>
-                  <TableRowColumn>{user.date}</TableRowColumn>
-                  <TableRowColumn>{user.accountType}</TableRowColumn>
-                  <TableRowColumn>{user.networkName}</TableRowColumn>                  
+    let {rows_filtered, pageSize, pageNumber, totalPage} = this.state;
+    // get pagination rows
+
+    let startPos = (pageNumber - 1) * pageSize, endPos = pageNumber * pageSize;
+    let rows_displayed = rows_filtered.slice(startPos, endPos);
+
+    let body = rows_displayed.map((user, index) => {
+                return (<TableRow style={styles.pagination.row} key={index} selectable={false}>
+                  <TableRowColumn style={styles.pagination.col_0}>{user[0]}</TableRowColumn>
+                  <TableRowColumn style={styles.pagination.col_1}>{user[1]}</TableRowColumn>
+                  <TableRowColumn style={styles.pagination.col_2}>{user[2]}</TableRowColumn>
+                  <TableRowColumn style={styles.pagination.col_0}>{user[3]}</TableRowColumn>
+                  <TableRowColumn style={styles.pagination.col_1}>{user[4]}</TableRowColumn>
+                  <TableRowColumn style={styles.pagination.col_2}>{user[5]}</TableRowColumn>
                 </TableRow>);
               });
     return (
       <div style={{ maxHeight: 400, marginTop: 10 }}>
-        {this.state.tab}
         <Table >
             <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
               <TableRow>
-                <TableHeaderColumn>Name</TableHeaderColumn>
-                <TableHeaderColumn>Username</TableHeaderColumn>
-                <TableHeaderColumn>Email</TableHeaderColumn>
-                <TableHeaderColumn>Date</TableHeaderColumn>
-                <TableHeaderColumn>Account Type</TableHeaderColumn>
-                <TableHeaderColumn>Network Name</TableHeaderColumn>
+                <TableHeaderColumn style={styles.pagination.header_0}>Order ID</TableHeaderColumn>
+                <TableHeaderColumn style={styles.pagination.header_1}>Tracking Number</TableHeaderColumn>
+                <TableHeaderColumn style={styles.pagination.header_2}>Numbers of items in package</TableHeaderColumn>
+                <TableHeaderColumn style={styles.pagination.header_0}>Origin</TableHeaderColumn>
+                <TableHeaderColumn style={styles.pagination.header_1}>Destination</TableHeaderColumn>
+                <TableHeaderColumn style={styles.pagination.header_2}>Status</TableHeaderColumn>
               </TableRow>
             </TableHeader>
             <TableBody displayRowCheckbox={false}>
             {body}
             </TableBody>
         </Table>
+        <div className={CSSStyle["pagination-bar"]}>
+          <div className={CSSStyle["pagination-item"]}>
+            Total: {rows_filtered.length}
+          </div>
+          <div className={CSSStyle["pagination-control"]}>
+            <Pagination total={totalPage} display={5} current={pageNumber} onChange={this.onPaginationClick}/>
+          </div>
+          <div className={CSSStyle["pagination-pageSize", "pagination-item"]}>
+            <SelectField
+              floatingLabelText="PageSize"
+              value={pageSize}
+              onChange={this.onPageSizeChange}
+              style={styles.pagination.pageSize}
+            >
+              {
+              pageSizes.map((size) => {
+                return <MenuItem key={size} value={size} primaryText={size} />
+                })
+              }
+            </SelectField>
+          </div>
+        </div>
       </div>
     );
   }
 
-  handleTabChange (value) {
-    this.setState({
-      tab: value,
-    });
+  adjustPageNumber = (rows_filtered, pageSize) => {
+      let {pageNumber} = this.state;
+      let total = rows_filtered.length;
+      if ((pageNumber - 1) * pageSize >= total){
+          pageNumber = 1;
+      }
+      let totalPage = Math.ceil(total / pageSize);
+      this.setState({pageNumber: pageNumber, totalPage: totalPage});
+  }
+  onPaginationClick = (pageNumber) => {
+      this.setState({pageNumber: pageNumber});
+  }
+  onPageSizeChange = (event, key, payload) => {
+      this.setState({pageSize: payload});
+      this.adjustPageNumber(this.state.rows_filtered, payload);
   }
 
-  render() {
-    console.log(this.props.data);
-    const styles = {
-      container: {
-        width: '100%',
-        padding: 16,
-        marginBottom: 16,
-      },
-      header: {
-        fontSize: 20,
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-      },
-      rightButton: {
-        display: 'flex',
-      },
-      headline: {
-        fontSize: 24,
-        paddingTop: 16,
-        marginBottom: 12,
-        fontWeight: 400,
-      },
-    };
+  handleRadioChange (event, filter) {
+    let rows = this.state.rows
+    let rows_filtered = rows
+    if(filter != 'all'){
+      rows_filtered = rows_filtered.filter((item) =>{
+        let status = !item[5] ? '' : item[5].trim().toLowerCase();
+        return status == filter;
+      });
+    }
+
+    this.setState({
+      rows_filtered: rows_filtered,
+      filter: filter,
+    });
+    this.adjustPageNumber(rows_filtered, this.state.pageSize);
+  }
+
+  render() { 
     return (
       <Paper style={styles.container} zDepth={1}>
         <div style={styles.header}>
@@ -156,23 +228,29 @@ class PackageTracking extends Component{
             Package Tracking
           </div>
         </div>
-        <Tabs style={{marginTop: 30}}
-          value={this.state.tab}
-          onChange={this.handleTabChange.bind(this)}
-        >
-          <Tab label="All" value="all">
-            {this.getTable()}
-          </Tab>
-          <Tab label="Allocated" value="allocated">
-            {this.getTable()}
-          </Tab>
-          <Tab label="In Transit" value="in_transit">
-            {this.getTable()}
-          </Tab>
-          <Tab label="Delivered" value="delivered">
-            {this.getTable()}
-          </Tab>
-        </Tabs>        
+        <RadioButtonGroup name="status" defaultSelected="all" style={styles.radioGroup} onChange={this.handleRadioChange.bind(this)}>
+          <RadioButton
+            value="all"
+            label="All"
+            style={styles.radioButton}
+          />
+          <RadioButton
+            value="allocated"
+            label="Allocated"
+            style={styles.radioButton}
+          />
+          <RadioButton
+            value="in transit"
+            label="In Transit"
+            style={styles.radioButton}
+          />
+          <RadioButton
+            value="delivered"
+            label="Delivered"
+            style={styles.radioButton}
+          />
+        </RadioButtonGroup>
+        {this.getTable()}      
       </Paper>
     )
   }

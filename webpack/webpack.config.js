@@ -31,7 +31,10 @@ module.exports = (options) => {
           test: /.jsx?$/,
           include: Path.join(__dirname, '../src/app'),
           loader: 'babel',
-        },
+        }, {
+          test: /\.css$/,
+          loader: 'style!css-loader?modules&importLoaders=1&localIdentName=[hash:base64:5]__[name]__[local]'
+        }
       ],
     },
     plugins: [

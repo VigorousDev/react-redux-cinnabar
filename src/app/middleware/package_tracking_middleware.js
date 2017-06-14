@@ -17,6 +17,7 @@ const PackageTrackingMiddleware = ({ getState, dispatch }) => next => action => 
     case 'GET_TRACKING_DETAILS': {
       const accessToken = getState().currentUser.accessToken;
       fetchPackageTracking(
+        getState,
         getSuccess,
         getFailure,
         accessToken

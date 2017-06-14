@@ -61,6 +61,7 @@
   "dependencies": {
     "axios": "^0.15.3",
     "bowser": "^1.6.0",
+    "css-loader": "^0.23.1",
     "d3": "^3.5.3",
     "d3-funnel": "^1.0.0",
     "express": "^4.13.4",
@@ -70,6 +71,7 @@
     "leaflet.heat": "^0.2.0",
     "lodash": "^4.16.4",
     "material-ui": "^0.16.4",
+    "material-ui-pagination": "^1.0.3",
     "nvd3": "^1.8.5",
     "qs": "^6.3.0",
     "radium": "^0.18.1",
